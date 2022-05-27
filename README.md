@@ -26,7 +26,7 @@ Before proceeding to these two parts, I first need to determine whether the ligh
 
 The first part is to complete the influence of the light source on the intersection of the current ray and the scene.
 
-![image-20220527142705259](E:\CG\Games\GAMES101\study report\Week2\Study report for week 2.assets\image-20220527142705259.png)
+![image](https://user-images.githubusercontent.com/68177870/170715429-896a9f0d-4b8c-4660-bc5d-cc48274dbe63.png)
 
 Here, it is necessary to sample the light source and judge whether the light source and the intersection point have occlusion.
 
@@ -65,7 +65,7 @@ Here, it is necessary to sample the light source and judge whether the light sou
 
 The second part involves recursively calculating the effect of indirect light on the current intersection P.
 
-![image-20220527145342978](E:\CG\Games\GAMES101\study report\Week2\Study report for week 2.assets\image-20220527145342978.png)
+![image](https://user-images.githubusercontent.com/68177870/170715472-2598e7ed-beb5-49a9-836f-bc96c944e358.png)
 
 ```CPP
 	//其他物体对P的间接光照影响;
@@ -89,7 +89,7 @@ The second part involves recursively calculating the effect of indirect light on
 
 Let's take a look at the render result.
 
-<img src="E:\CG\Games\GAMES101\study report\Week2\pic\binary3_1.jpg" align=mid width="70%" height="70%"/>
+![binary3_1](https://user-images.githubusercontent.com/68177870/170715575-1a2d99b8-2fef-48f8-b468-99a16eee02ed.jpg)
 
 Something serious has gone wrong. I need to recheck the algorithm code. It turned out to be a precision problem. The EPSILON value was set too low. Increase EPSILON.
 
@@ -100,17 +100,7 @@ const float EPSILON = 0.00016;
 Look at the render result again.
 
 
-<center>
-	<img src="E:\CG\Games\GAMES101\study report\Week2\pic\binary3_2.jpg" width="40%" />
-	&emsp;&emsp;&emsp;&emsp;
-	<img src="E:\CG\Games\GAMES101\study report\Week2\pic\image-20220527213946646.png" width="40%" />
-	<br/>
-	<font color="AAAAAA">My Result</font>
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	<font color="AAAAAA">correct Result</font>
-</center>
+![binary3_2](https://user-images.githubusercontent.com/68177870/170715608-3f15162f-40b1-4054-8fe3-e017ba847a42.jpg)
 
 
 It seems to be brighter than the standard answer.
@@ -124,16 +114,6 @@ It turns out that I forgot to test the probability of Russian roulette against R
     }   
 ```
 
-<center>
-	<img src="E:\CG\Games\GAMES101\study report\Week2\pic\binary3_3.jpg" width="40%" />
-	&emsp;&emsp;&emsp;&emsp;
-	<img src="E:\CG\Games\GAMES101\study report\Week2\pic\image-20220527213946646.png" width="40%" />
-	<br/>
-	<font color="AAAAAA">My Result</font>
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	<font color="AAAAAA">correct Result</font>
-</center>
+![binary3_3](https://user-images.githubusercontent.com/68177870/170715639-35ac3f0f-d4f7-412c-ac20-0d18805c18a8.jpg)
 
 Now the result seems to be correct.
